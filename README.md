@@ -21,7 +21,7 @@
 
 <p align="center"><sub>下载后解压 → 双击 <code>install.cmd</code> → 浏览器自动打开。不需要装别的东西。</sub></p>
 
-<h2 align="center">对抗算法与推荐</h2>
+<h2 align="center">你还在忍受 B 站的搜索吗？NO——排序不该由推荐算法替你做主</h2>
 
 ## 🔍 这是什么
 
