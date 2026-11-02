@@ -10,11 +10,11 @@
 
 ## Fighting the algorithm
 
-A local, self-indexed search tool for Bilibili. Six search dimensions: everything / title / description / tag / uploader / UID.
+A locally-run search tool for Bilibili with its own ranking. Six search dimensions: everything / title / description / tag / uploader / UID.
 
 The results page is mostly recommendations — trending, "related", promoted — with a handful of real hits mixed in. Keyword matches get buried under fresh re-uploads and clips, searching an uploader's name returns videos that merely contain those characters, and descriptions or tags are not treated as searchable at all. Filtering and sorting are limited to the few presets the platform offers.
 
-Measured: searching a song title scanned 100 results, of which only 48 actually matched title, description or tag — roughly half was recommendation filler.
+Measured: searching a song title scanned 100 results, of which only 48 actually had the keyword in the title — over half did not contain it where it counts.
 
 This project pulls the results out of that pile and ranks them by rules you choose: relevance, where the keyword hit, play count, publish date.
 
@@ -23,13 +23,13 @@ Runs entirely on your machine, listens on `127.0.0.1:18788`, uploads nothing, ne
 ## What you get
 
 - **Six dimensions** — everything / title / description / tag / uploader / UID
-- **Filters** — duration (presets or custom minutes), publish date (today … older than a year, or custom range)
+- **Filters** — duration (10–15 / 15–30 / 30–60 / 60–120 min / 2 h+, or custom minutes), publish date (today … older than a year, or custom range)
 - **Sorting** — relevance, heat, newest, oldest, play count, danmaku, favourites
 - **Match strictness** — standard (title/description/tag) · standard without tags · strict (title only) · loose (platform order)
 - **Hit visibility** — every card says whether it matched on title, description or tag
-- **Local archive** — every video seen is recorded; one click re-checks each one and classifies it as alive / deleted / private / unknown (unknown is never reported as deleted)
+- **Local archive** — every video that passes the filters and gets shown is recorded; one click re-checks each one and classifies it as alive / deleted / private / unknown (unknown is never reported as deleted)
 - **Backup-site lookup** — off by default; HEAD requests only, one per second, serial, cached forever on hit
-- **Probe log** — success rate, p50, p95 per endpoint
+- **Probe log** — success rate, p50, p95 per request path
 
 ## Run it
 
@@ -48,8 +48,8 @@ Pure Python standard library only — no third-party packages. Data lives in `da
 
 ## Known limits
 
-- Uploader *video list* is not implemented: that endpoint is behind Bilibili's risk control and returns errors reliably enough that shipping half of it would be worse than not shipping it.
+- Uploader video lists are available from each uploader card; that endpoint is behind Bilibili's risk control and sometimes answers with -352, in which case you get a "try later" message.
 - First search per keyword scans several pages and can take a few seconds; repeated queries hit the local cache for 10 minutes.
-- Only public metadata is indexed. No login, no cookies, no video content.
+- Only public metadata is fetched. No account and no login; the only cookie sent is an anonymous device id (buvid3). No video content.
 
 MIT licensed.
