@@ -12,7 +12,11 @@
 
 A local, self-indexed search tool for Bilibili. Six search dimensions: everything / title / description / tag / uploader / UID.
 
-Platform search does not fail to *find* things; it ranks them for its own reasons — fresh low-effort re-uploads above older originals, tangentially related videos above the uploader you typed, and description or tags not treated as searchable at all. This project keeps the same public metadata and ranks it **by rules you choose**: relevance, where the keyword hit, play count, publish date.
+The results page is mostly recommendations — trending, "related", promoted — with a handful of real hits mixed in. Keyword matches get buried under fresh re-uploads and clips, searching an uploader's name returns videos that merely contain those characters, and descriptions or tags are not treated as searchable at all. Filtering and sorting are limited to the few presets the platform offers.
+
+Measured: searching a song title scanned 100 results, of which only 48 actually matched title, description or tag — roughly half was recommendation filler.
+
+This project pulls the results out of that pile and ranks them by rules you choose: relevance, where the keyword hit, play count, publish date.
 
 Runs entirely on your machine, listens on `127.0.0.1:18788`, uploads nothing, needs no account.
 
